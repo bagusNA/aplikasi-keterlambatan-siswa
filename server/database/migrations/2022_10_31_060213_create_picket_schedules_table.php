@@ -15,17 +15,9 @@ return new class extends Migration
     {
         Schema::create('picket_schedules', function (Blueprint $table) {
             $table->id();
-            $table->enum('day', [
-                'Mon',
-                'Tue',
-                'Wed',
-                'Thu',
-                'Fri',
-                'Sat',
-                'Sun'
-            ]);
             $table->foreignId('picket_session_id');
             $table->foreignId('teacher_id');
+            // Might move this school_year_id to picket_sessions table if PicketSession needs to be archived
             $table->foreignId('school_year_id');
             $table->timestamps();
 

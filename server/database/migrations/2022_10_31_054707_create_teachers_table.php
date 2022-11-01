@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->string('nip', 32);
             $table->string('name', 96);
             $table->timestamps();
 

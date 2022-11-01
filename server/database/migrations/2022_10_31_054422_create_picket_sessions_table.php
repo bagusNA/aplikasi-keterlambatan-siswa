@@ -15,9 +15,22 @@ return new class extends Migration
     {
         Schema::create('picket_sessions', function (Blueprint $table) {
             $table->id();
+            $table->enum('day', [
+                'Mon',
+                'Tue',
+                'Wed',
+                'Thu',
+                'Fri',
+                'Sat',
+                'Sun'
+            ]);
             $table->time('time_start');
             $table->time('time_end');
             $table->timestamps();
+
+            // Might use these for it needs to be archived per school year
+            // $table->foreignId('school_year_id');
+            // $table->foreign('school_year_id')->references('id')->on('school_years');
         });
     }
 
