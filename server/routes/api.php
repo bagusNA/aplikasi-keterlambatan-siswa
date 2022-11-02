@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PicketScheduleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,13 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/api/v1')->group(function() {
+Route::prefix('/v1')->group(function() {
     Route::controller(AuthController::class)->prefix('/auth')->group(function () {
         Route::post('/login', 'login');
         Route::post('/logout', 'logout');
     });
 
     Route::middleware('auth:sanctum')->group(function () {
-
+        Route::controller(PicketScheduleController::class)->prefix('/picket-schedules')->group(function () {
+            Route::get('/', 'show');
+            Route::get('/{day}', 'detail');
+            Route::post('/', 'create');
+        });
     });
 });

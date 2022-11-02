@@ -15,7 +15,7 @@ class PicketSchedule extends Model
     // Relations
     public function session(): BelongsTo
     {
-        return $this->belongsTo(PicketSession::class);
+        return $this->belongsTo(PicketSession::class, 'picket_session_id');
     }
 
     public function teacher(): BelongsTo
@@ -25,6 +25,6 @@ class PicketSchedule extends Model
 
     public function year(): BelongsTo
     {
-        return $this->belongsTo(SchoolYear::class);
+        return $this->belongsTo(SchoolYear::class, 'school_year_id');
     }
 }
