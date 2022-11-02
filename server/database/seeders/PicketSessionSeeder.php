@@ -15,24 +15,37 @@ class PicketSessionSeeder extends Seeder
      */
     public function run()
     {
-        PicketSession::factory()->create([
-            'time_start' => '07:00',
-            'time_end' => '10:00'
-        ]);
+        $days = [
+            'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+        ];
 
-        PicketSession::factory()->create([
-            'time_start' => '10:00',
-            'time_end' => '13:00'
-        ]);
+        $times = [
+            [
+                'start' => '07:00',
+                'end' => '10:00',
+            ],
+            [
+                'start' => '10:00',
+                'end' => '13:00',
+            ],
+            [
+                'start' => '13:00',
+                'end' => '16:00',
+            ],
+            [
+                'start' => '16:00',
+                'end' => '17:00',
+            ],
+        ];
 
-        PicketSession::factory()->create([
-            'time_start' => '13:00',
-            'time_end' => '16:00'
-        ]);
-
-        PicketSession::factory()->create([
-            'time_start' => '16:00',
-            'time_end' => '17:00'
-        ]);
+        foreach ($days as $day) {
+            foreach ($times as $time) {
+                PicketSession::factory()->create([
+                    'day' => $day,
+                    'time_start' => $time['start'],
+                    'time_end' => $time['end'],
+                ]);
+            }
+        }
     }
 }

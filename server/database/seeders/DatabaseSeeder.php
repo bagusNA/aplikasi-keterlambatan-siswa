@@ -16,20 +16,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // These needs to be in order
         $this->call([
+            OptionSeeder::class,
             RoleSeeder::class,
             SchoolYearSeeder::class,
             SpecialtySeeder::class,
+
+            UserSeeder::class,
+            TeacherSeeder::class,
+
             PicketSessionSeeder::class,
-            OptionSeeder::class,
+            PicketScheduleSeeder::class,
         ]);
 
-        User::factory()->create([
-            'username' => 'admin',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'role_id' => random_int(1, 4),
-        ]);
-
-        User::factory(10)->create();
+        
     }
 }
