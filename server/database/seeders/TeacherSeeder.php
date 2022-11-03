@@ -15,7 +15,7 @@ class TeacherSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=2; $i <= 11; $i++) { 
+        for ($i=2; $i <= 51; $i++) { 
             Teacher::factory()->create([
                 'user_id' => $i,
                 'nip' => '0000 0000 0000',

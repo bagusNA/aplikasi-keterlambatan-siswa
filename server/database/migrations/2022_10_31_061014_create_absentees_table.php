@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('absentees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('teacher_id');
+            $table->foreignId('student_id');
+            $table->foreignId('picket_schedule_id');
             $table->time('time_arrived');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('picket_schedule_id')->references('id')->on('picket_schedules');
         });
     }
 
