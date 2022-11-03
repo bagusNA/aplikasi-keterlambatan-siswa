@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PicketSchedule;
-use App\Models\PicketSession;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class PicketScheduleController extends Controller
 {
@@ -24,14 +22,7 @@ class PicketScheduleController extends Controller
         if ($day === 'today')
             $day = date('D');
 
-        $sessions = PicketSession::where('day', $day)
-                        ->get()
-                        ->pluck('id')
-                        ->toArray();
-
-        $schedules = PicketSchedule::whereIn('picket_session_id', $sessions)
-                        ->with(['session', 'teacher'])
-                        ->get();
+        $schedules = PicketSchedule::getSchedulesByDay($day);
 
         return $this->successRes([
             'message' => 'Get schedules success!',
@@ -41,16 +32,11 @@ class PicketScheduleController extends Controller
 
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'picket_session_id' => 'required|integer',
-            'teacher_id' => 'required|integer',
-            'school_year_id' => 'required|integer',
-        ]);
-
-        if ($validator->fails())
-            return $this->validationErrorRes($validator->errors());
-
-        $input = $validator->getData();
+        $input = $request->all();
+        $validation = PicketSchedule::validate($input);
+        
+        if ($validation !== true)
+            return $this->validationErrorRes($validation);
 
         $schedule = PicketSchedule::create([
             'picket_session_id' => $input['picket_session_id'],

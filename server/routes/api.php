@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenteeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PicketScheduleController;
 use Illuminate\Http\Request;
@@ -23,10 +24,21 @@ Route::prefix('/v1')->group(function() {
     });
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::controller(PicketScheduleController::class)->prefix('/picket-schedules')->group(function () {
-            Route::get('/', 'show');
-            Route::get('/{day}', 'detail');
-            Route::post('/', 'create');
-        });
+        Route::controller(PicketScheduleController::class)
+            ->prefix('/picket-schedules')
+            ->group(function () {
+                Route::get('/', 'show');
+                Route::get('/{day}', 'detail');
+                Route::post('/', 'create');
+            });
+
+        Route::controller(AbsenteeController::class)
+            ->prefix('/absents')
+            ->group(function () {
+                Route::get('/', 'show');
+                // Route::get('/{day}', 'detail');
+                Route::post('/', 'create');
+            });
+
     });
 });

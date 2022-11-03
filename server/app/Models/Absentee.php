@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Validator;
 
 class Absentee extends Model
 {
@@ -20,6 +22,17 @@ class Absentee extends Model
 
     public function schedule(): BelongsTo
     {
-        return $this->belongsTo(PicketSchedule::class);
+        return $this->belongsTo(PicketSchedule::class, 'picket_schedule_id');
+    }
+
+    public static function validate($data): bool | MessageBag
+    {
+        $validation = Validator::make($data, [
+            'student_id' => 'required|integer',
+            'picket_schedule_id' => 'required|integer',
+            'time_arrived' => 'required|date', 
+        ]);
+
+        return $validation->fails() ? $validation->errors() : true;
     }
 }
