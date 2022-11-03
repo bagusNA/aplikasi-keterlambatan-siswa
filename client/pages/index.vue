@@ -1,7 +1,6 @@
 <template>
-  <div class="wrapper">
-    <p class="text">HI</p>
-    <NuxtLink to="/login">Login</NuxtLink>
-    <NuxtLink to="/test">Test</NuxtLink>
-  </div>
+  <main class="wrapper">
+    <h4>Piket Pintar</h4>
+    <h6>SMK Negeri 7 Samarinda</h6>
+  </main>
 </template>
