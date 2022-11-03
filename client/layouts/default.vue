@@ -1,8 +1,14 @@
+<script setup lang="ts">
+const route = useRoute();
+</script>
+
 <template>
   <div>
-    <Sidebar id="side-bar" />
+    <Sidebar v-if="route.name !== 'login'"
+      id="side-bar" />
     <slot />
-    <BottomBar id="bottom-bar" />
+    <BottomBar v-if="route.name !== 'login'"
+      id="bottom-bar" />
   </div>
 </template>
 

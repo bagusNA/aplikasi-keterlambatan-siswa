@@ -1,5 +1,88 @@
+<script setup lang="ts">
+const store = useStore();
+const router = useRouter();
+const config = useAppConfig();
+
+const isLoading = ref(false);
+
+const form = reactive({
+  username: null as string,
+  password: null as string,
+});
+
+const loginAction = async () => {
+  isLoading.value = true;
+
+  const res = await fetch(`${config.endpoint}/api/v1/auth/login`, {
+    method: 'POST',
+    body: JSON.stringify({
+      username: form.username,
+      password: form.password
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const data = await res.json();
+  store.setToken((data as any).token!);
+
+  router.push({ name: 'index' });
+}
+</script>
+
 <template>
   <div class="wrapper">
-    <h1>Login</h1>
+    <article id="login" class="border small-elevate">
+      <h4 class="login__title">Login</h4>
+
+      <form @submit.prevent="loginAction" method="post">
+        <div class="field label border round">
+          <input type="text" v-model="form.username">
+          <label>Username</label>
+        </div>
+
+        <div class="field label border round">
+          <input type="password" v-model="form.password">
+          <label>Password</label>
+        </div>
+
+        <button class="responsive small-elevate large round">
+          <i>login</i>
+          <span>Login</span>
+        </button>
+      </form>
+    </article>
   </div>
 </template>
+
+<style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--primary-container);
+  background-image: url("/svg/blob.svg");
+  background-size: cover;
+  background-position: center;
+}
+
+#login {
+  background-color: var(--primary-container);
+}
+
+.login__title {
+  margin-bottom: 22rem;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    background-image: url("/svg/blob2.svg");
+  }
+}
+</style>

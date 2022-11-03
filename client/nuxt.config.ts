@@ -14,4 +14,14 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['stores']
   },
+  app: {
+    head: {
+      link: [
+        { href: 'https://fonts.googleapis.com', rel: 'preload'},
+        { href: 'https://fonts.gstatic.com', rel: 'preload', crossorigin: ''},
+        { href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap', rel: 'stylesheet'},
+      ]
+    }
+  },
+
 });
