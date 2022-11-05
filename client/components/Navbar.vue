@@ -5,12 +5,12 @@ const router = useRouter();
 const url = `${useAppConfig().endpoint}/api/v1/auth/logout`;
 const message = ref('');
 
-const logoutAction = () => {
-  const data = useAuthPost(url);
+const logoutAction = async () => {
+  const data = await useAuthPost(url);
 
   message.value = (data as any).message;
 
-  store.clearToken();
+  store.clearAuth();
   router.push({ name: 'login' });
 };
 </script>

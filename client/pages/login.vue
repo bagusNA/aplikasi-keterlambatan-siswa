@@ -38,7 +38,7 @@ const loginAction = async () => {
     return;
   }
 
-  store.setToken(data.token);
+  store.setAuth(data.token, data.user);
   router.push({ name: 'index' });
 }
 </script>

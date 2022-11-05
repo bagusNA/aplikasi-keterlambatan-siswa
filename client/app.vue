@@ -1,3 +1,9 @@
+<script setup lang="ts">
+const store = useStore();
+
+store.getAuthFromLocal();
+</script>
+
 <template>
   <div>
     <NuxtLayout>
