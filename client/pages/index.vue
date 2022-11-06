@@ -1,12 +1,15 @@
 <script setup lang="ts">
 const store = useStore();
+const router = useRouter();
 
 const isModalShown = useState('show-modal', () => false);
 </script>
 
 <template>
   <main class="wrapper">
-    <CardWelcome name="Rahmat"/>
+    <h4 class="wrapper__title">Dashboard</h4>
+    <CardWelcome name="Rahmat" />
+
     <div class="cards-wrapper">
       <CardSummary title="Terlambat Hari Ini">
         <p>12 Orang</p>
@@ -15,13 +18,22 @@ const isModalShown = useState('show-modal', () => false);
         <p>07:00 - 10:00</p>
       </CardSummary>
     </div>
-    <button @click="isModalShown = !isModalShown"
-      class="extend square round"
-      id="btn-add"
+
+<!--    <button @click="isModalShown = !isModalShown"-->
+<!--      class="extend square round"-->
+<!--      id="btn-add"-->
+<!--    >-->
+<!--      <i>add</i>-->
+<!--      <span>Absen</span>-->
+<!--    </button>-->
+
+    <button @click="() => router.push('/absent-add')"
+      class="extend square round" id="btn-add"
     >
       <i>add</i>
       <span>Absen</span>
     </button>
+
     <Modal :status="isModalShown">
       lsdfjk
     </Modal>

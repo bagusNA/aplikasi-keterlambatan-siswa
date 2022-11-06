@@ -18,8 +18,16 @@ const route = useRoute();
   min-height: calc(100vh - 80rem);
 }
 
+.wrapper__title {
+  padding: 10rem 0;
+}
+
 .round-small {
   border-radius: 12rem;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 600px) {

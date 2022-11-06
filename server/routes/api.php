@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsenteeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PicketScheduleController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +41,12 @@ Route::prefix('/v1')->group(function() {
                 Route::post('/', 'create');
             });
 
+        Route::controller(StudentController::class)
+            ->prefix('/students')
+            ->group(function () {
+                Route::get('/', 'show');
+                // Route::get('/{day}', 'detail');
+//                Route::post('/', 'create');
+            });
     });
 });
