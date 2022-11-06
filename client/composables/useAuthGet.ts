@@ -1,7 +1,7 @@
-import { useStore } from "../stores/Store";
+import { useAuthStore } from "../stores/AuthStore";
 
 export const useAuthGet = async (url: string) => {
-  const store = useStore();
+  const store = useAuthStore();
 
   const res = await fetch(url, {
     method: 'GET',

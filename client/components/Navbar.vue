@@ -1,16 +1,10 @@
 <script setup lang="ts">
 const store = useStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
-const url = `${useAppConfig().endpoint}/api/v1/auth/logout`;
-const message = ref('');
-
 const logoutAction = async () => {
-  const data = await useAuthPost(url);
-
-  message.value = (data as any).message;
-
-  store.clearAuth();
+  await authStore.logout();
   router.push({ name: 'login' });
 };
 </script>
@@ -57,5 +51,8 @@ const logoutAction = async () => {
     </NuxtLink>
   </nav>
 
-  <ToastSuccess :message="message" v-show="message" />
+  <ToastSuccess 
+    v-show="store.success.status" 
+    :message="store.success.message" 
+  />
 </template>

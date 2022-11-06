@@ -1,41 +1,46 @@
+interface MessageBag {
+  status: boolean,
+  message: string
+}
+
 export const useStore = defineStore('main', {
   state: () => ({
-    token: null as string,
-    user: null as any,
-
-    isAddModalShown: false
+    error: {
+      status: false,
+      message: ''
+    } as MessageBag,
+    success: {
+      status: false,
+      message: ''
+    } as MessageBag
   }),
 
   actions: {
-    getAuthFromLocal() {
-      this.token = JSON.parse(localStorage.getItem('token'));
-      this.user = JSON.parse(localStorage.getItem('user'));
+    setError(message: string, duration?: number) {
+      this.error.status = true;
+      this.error.message = message;
+
+
+      if (duration)
+        setTimeout(this.clearError, duration);
     },
 
-    setAuth(token, userData) {
-      this.token = token;
-      localStorage.setItem('token', JSON.stringify(token));
-
-      this.user = userData;
-      localStorage.setItem('user', JSON.stringify(userData));
+    clearError() {
+      this.error.status = false;
+      this.error.message = null;
     },
 
-    clearAuth() {
-      this.token = null;
-      this.user = null;
+    setSuccess(message: string, duration?: number) {
+      this.success.status = true;
+      this.success.message = message;
+
+      if (duration)
+        setTimeout(this.clearSuccess, duration);
     },
 
-    isAuth() {
-      return (this.token && this.user);
+    clearSuccess() {
+      this.success.status = false;
+      this.success.message = null;
     },
-
-    showAddModal() {
-      this.isAddModalShown = true;
-    },
-
-    hideAddModal() {
-      this.isAddModalShown = false;
-    }
   }
-
 });

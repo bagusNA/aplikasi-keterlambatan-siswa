@@ -1,13 +1,9 @@
 <script setup lang="ts">
 const store = useStore();
+const authStore = useAuthStore();
 const router = useRouter();
-const config = useAppConfig();
 
 const isLoading = ref(false);
-const error = reactive({
-  status: false,
-  message: ''
-});
 
 const form = reactive({
   username: null as string,
@@ -16,29 +12,10 @@ const form = reactive({
 
 const loginAction = async () => {
   isLoading.value = true;
-
-  const res = await fetch(`${config.endpoint}/api/v1/auth/login`, {
-    method: 'POST',
-    body: JSON.stringify({
-      username: form.username,
-      password: form.password
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-
-  const data = await res.json();
+  const login = await authStore.login(form.username, form.password);  
   isLoading.value = false;
 
-  if (!data.token) {
-    error.status = true;
-    error.message = data.message;
-
-    return;
-  }
-
-  store.setAuth(data.token, data.user);
+  if (!login) return;
   router.push({ name: 'index' });
 }
 </script>
@@ -77,9 +54,9 @@ const loginAction = async () => {
     </article>
 
     <ToastError 
-      :message="error.message" 
-      v-show="error.status" 
-      @click="error.status = false"
+      :message="store.error.message ?? ''" 
+      v-show="store.error.status" 
+      @click="store.clearError"
     />
   </div>
 </template>

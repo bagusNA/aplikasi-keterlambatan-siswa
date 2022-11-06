@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const store = useStore();
+
+const isModalShown = useState('show-modal', () => false);
 </script>
 
 <template>
@@ -13,14 +15,14 @@ const store = useStore();
         <p>07:00 - 10:00</p>
       </CardSummary>
     </div>
-    <button @click="store.showAddModal"
+    <button @click="isModalShown = !isModalShown"
       class="extend square round"
       id="btn-add"
     >
       <i>add</i>
       <span>Absen</span>
     </button>
-    <Modal :status="store.isAddModalShown">
+    <Modal :status="isModalShown">
       lsdfjk
     </Modal>
   </main>
