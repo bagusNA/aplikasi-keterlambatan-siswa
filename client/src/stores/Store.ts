@@ -1,6 +1,8 @@
+import { defineStore } from "pinia";
+
 interface MessageBag {
   status: boolean,
-  message: string
+  message: string | null
 }
 
 export const useStore = defineStore('main', {
@@ -12,7 +14,8 @@ export const useStore = defineStore('main', {
     success: {
       status: false,
       message: ''
-    } as MessageBag
+    } as MessageBag,
+    selectedStudent: null,
   }),
 
   actions: {

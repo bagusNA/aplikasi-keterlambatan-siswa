@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/AuthStore';
+import { useStore } from '@/stores/Store';
+import Loading from '@/components/Loading.vue';
+import ToastError from '@/components/Toast/ToastError.vue';
+
 const store = useStore();
 const authStore = useAuthStore();
 const router = useRouter();
@@ -6,8 +13,8 @@ const router = useRouter();
 const isLoading = ref(false);
 
 const form = reactive({
-  username: null as string,
-  password: null as string,
+  username: '',
+  password: '',
 });
 
 const loginAction = async () => {
@@ -71,7 +78,7 @@ const loginAction = async () => {
   min-height: 100vh;
   margin: 0;
   background-color: var(--primary-container);
-  background-image: url("/svg/blob.svg");
+  background-image: url("@/assets/svg/blob.svg");
   background-size: cover;
   background-position: center;
 }
@@ -86,7 +93,7 @@ const loginAction = async () => {
 }
 
 #login__hero {
-  background-image: url('/img/hero-1.jpg');
+  background-image: url('@/assets/img/hero-1.jpg');
   background-size: cover;
 }
 
@@ -104,7 +111,7 @@ const loginAction = async () => {
 
 @media only screen and (min-width: 768px) {
   .wrapper {
-    background-image: url("/svg/blob2.svg");
+    background-image: url("@/assets/svg/blob2.svg");
   }
 }
 </style>

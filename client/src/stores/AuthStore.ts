@@ -1,14 +1,17 @@
+import { useAuthPost } from "@/composables/useAuthPost";
+import { defineStore } from "pinia";
+import { inject } from "vue";
 import { useStore } from "./Store";
 
 interface AuthStore {
-  token: string,
+  token: string | null,
   user: any
 }
 
 export const useAuthStore = defineStore('auth', {
   state: (): AuthStore => ({
-    token: JSON.parse(localStorage.getItem('token')) ?? null,
-    user: JSON.parse(localStorage.getItem('user')) ?? null,
+    token: JSON.parse(localStorage.getItem('token')!) ?? null,
+    user: JSON.parse(localStorage.getItem('user')!) ?? null,
   }),
 
   getters: {
@@ -19,12 +22,12 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
     getAuthFromLocal() {
-      this.token = JSON.parse(localStorage.getItem('token'));
-      this.user = JSON.parse(localStorage.getItem('user'));
+      this.token = JSON.parse(localStorage.getItem('token')!);
+      this.user = JSON.parse(localStorage.getItem('user')!);
     },
 
-    async login(username, password) {
-      const endpoint = useAppConfig().endpoint;
+    async login(username: string, password: string) {
+      const endpoint = inject('endpoint');
       const store = useStore();
 
       const res = await fetch(`${endpoint}/api/v1/auth/login`, {
@@ -55,7 +58,7 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async logout() {
-      const endpoint = useAppConfig().endpoint;
+      const endpoint = inject('endpoint');
       const store = useStore();
 
       const data = await useAuthPost(`${endpoint}/api/v1/auth/logout`);

@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { RouterLink, useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/AuthStore';
+import { useStore } from '@/stores/Store';
+import ToastSuccess from './Toast/ToastSuccess.vue';
+
 const store = useStore();
 const authStore = useAuthStore();
 const router = useRouter();
@@ -11,48 +16,48 @@ const logoutAction = async () => {
 
 <template>
   <nav class="m l left">
-    <NuxtLink to="/">
-      <img class="circle" src="/img/logo.png" id="logo">
-    </NuxtLink>
-    <NuxtLink to="/">
+    <RouterLink to="/">
+      <img class="circle" src="@/assets/img/logo.png" id="logo">
+    </RouterLink>
+    <RouterLink to="/">
       <i>home</i>
       <span>Home</span>
-    </NuxtLink>
-    <NuxtLink to="/absent">
+    </RouterLink>
+    <RouterLink to="/absent">
       <i>history_edu</i>
       <span>Absen</span>
-    </NuxtLink>
-    <NuxtLink to="/">
+    </RouterLink>
+    <RouterLink to="/">
       <i>event</i>
       <span>Jadwal</span>
-    </NuxtLink>
-    <NuxtLink @click="logoutAction">
+    </RouterLink>
+    <a @click="logoutAction">
       <i>logout</i>
       <span>Logout</span>
-    </NuxtLink>
+    </a>
   </nav>
 
   <nav class="s bottom">
-    <NuxtLink to="/">
+    <RouterLink to="/">
       <i>home</i>
       <span>Home</span>
-    </NuxtLink>
-    <NuxtLink to="/absent">
+    </RouterLink>
+    <RouterLink to="/absent">
       <i>history_edu</i>
       <span>Absen</span>
-    </NuxtLink>
-    <NuxtLink to="/">
+    </RouterLink>
+    <RouterLink to="/">
       <i>event</i>
       <span>Jadwal</span>
-    </NuxtLink>
-    <NuxtLink @click="logoutAction">
+    </RouterLink>
+    <a @click="logoutAction">
       <i>logout</i>
       <span>Logout</span>
-    </NuxtLink>
+    </a>
   </nav>
 
   <ToastSuccess 
     v-show="store.success.status" 
-    :message="store.success.message" 
+    :message="store.success.message!" 
   />
 </template>

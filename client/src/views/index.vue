@@ -1,8 +1,15 @@
 <script setup lang="ts">
-const store = useStore();
-const router = useRouter();
+import CardSummary from '@/components/Card/CardSummary.vue';
+import CardWelcome from '@/components/Card/CardWelcome.vue';
+import Modal from '@/components/Modal.vue';
+import { useStore } from '@/stores/Store';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const isModalShown = useState('show-modal', () => false);
+const router = useRouter();
+const store = useStore();
+
+const isModalShown = ref(false);
 </script>
 
 <template>
@@ -27,7 +34,7 @@ const isModalShown = useState('show-modal', () => false);
 <!--      <span>Absen</span>-->
 <!--    </button>-->
 
-    <button @click="() => router.push('/absent-add')"
+    <button @click="() => router.push({ name: 'absent/add' })"
       class="extend square round" id="btn-add"
     >
       <i>add</i>
