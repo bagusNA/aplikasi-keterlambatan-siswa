@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\PicketSchedule;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class PicketScheduleController extends Controller
 {
@@ -14,6 +17,22 @@ class PicketScheduleController extends Controller
         return $this->successRes([
             'message' => 'Get all schedules success!',
             'schedules' => $schedules,
+        ]);
+    }
+
+    public function current(Request $request)
+    {
+        $user = $request->user();
+        $teacher = Teacher::where('user_id', $user->id)->first();
+        $time = new Date();
+
+        $schedule = PicketSchedule::where('teacher_id', $teacher->id)->first();
+
+        return $this->successRes([
+            'message' => 'Get current user schedule success!',
+            'schedule' => $schedule,
+            'time' => $time,
+            'teacher' => $teacher,
         ]);
     }
 

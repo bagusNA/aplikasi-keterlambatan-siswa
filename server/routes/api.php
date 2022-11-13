@@ -29,6 +29,7 @@ Route::prefix('/v1')->group(function() {
             ->prefix('/picket-schedules')
             ->group(function () {
                 Route::get('/', 'show');
+                Route::get('/current', 'current');
                 Route::get('/{day}', 'detail');
                 Route::post('/', 'create');
             });
