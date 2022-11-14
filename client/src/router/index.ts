@@ -1,13 +1,13 @@
 import { useAuthStore } from '@/stores/AuthStore';
 import { createRouter, createWebHistory } from 'vue-router';
-import Index from '../views/index.vue';
+import Index from '@/views/index.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'index',
       component: Index
     },
     {
@@ -33,13 +33,13 @@ const router = createRouter({
   ]
 });
 
-// router.beforeEach((to) => {
-//   const isAuth = useAuthStore().isAuth;
+router.beforeEach((to) => {
+  const isAuth = useAuthStore().isAuth;
 
-//   if (!isAuth && to.name !== 'login')
-//       return { name: 'login' };
-//   else if (isAuth && to.name === 'login')
-//       return { name: 'index' };
-// });
+  if (!isAuth && to.name !== 'login')
+      return { name: 'login' };
+  else if (isAuth && to.name === 'login')
+      return { name: 'index' };
+});
 
 export default router;

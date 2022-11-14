@@ -1,6 +1,6 @@
 import { useAuthPost } from "@/composables/useAuthPost";
+import { endpoint } from "@/main";
 import { defineStore } from "pinia";
-import { inject } from "vue";
 import { useStore } from "./Store";
 
 interface AuthStore {
@@ -27,7 +27,6 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async login(username: string, password: string) {
-      const endpoint = inject('endpoint');
       const store = useStore();
 
       const res = await fetch(`${endpoint}/api/v1/auth/login`, {
@@ -58,7 +57,6 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async logout() {
-      const endpoint = inject('endpoint');
       const store = useStore();
 
       const data = await useAuthPost(`${endpoint}/api/v1/auth/logout`);
