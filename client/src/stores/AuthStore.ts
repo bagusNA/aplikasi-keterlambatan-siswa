@@ -1,11 +1,12 @@
 import { useAuthPost } from "@/composables/useAuthPost";
 import { endpoint } from "@/main";
+import type { User } from "@/types/model";
 import { defineStore } from "pinia";
 import { useStore } from "./Store";
 
 interface AuthStore {
   token: string | null,
-  user: any
+  user: User | null
 }
 
 export const useAuthStore = defineStore('auth', {

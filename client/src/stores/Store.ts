@@ -1,3 +1,4 @@
+import type { Student } from "@/types/model";
 import { defineStore } from "pinia";
 
 interface MessageBag {
@@ -15,7 +16,7 @@ export const useStore = defineStore('main', {
       status: false,
       message: ''
     } as MessageBag,
-    selectedStudent: null,
+    selectedStudent: null as (Student | null),
   }),
 
   actions: {

@@ -20,10 +20,10 @@ class Absentee extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function schedule(): BelongsTo
-    {
-        return $this->belongsTo(PicketSchedule::class, 'picket_schedule_id');
-    }
+    // public function schedule(): BelongsTo
+    // {
+    //     return $this->belongsTo(PicketSchedule::class, 'picket_schedule_id');
+    // }
 
     public static function validate($data): bool | MessageBag
     {

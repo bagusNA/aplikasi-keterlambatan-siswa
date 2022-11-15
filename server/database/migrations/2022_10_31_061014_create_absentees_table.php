@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('absentees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id');
-            $table->foreignId('picket_schedule_id');
+            // $table->foreignId('picket_schedule_id');
             $table->time('time_arrived');
             $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('students');
-            $table->foreign('picket_schedule_id')->references('id')->on('picket_schedules');
+            // $table->foreign('picket_schedule_id')->references('id')->on('picket_schedules');
         });
     }
 

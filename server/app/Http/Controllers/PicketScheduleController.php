@@ -25,7 +25,7 @@ class PicketScheduleController extends Controller
         $user = $request->user();
         $teacher = Teacher::where('user_id', $user->id)->first();
         $time = new Date();
-
+        
         $schedule = PicketSchedule::where('teacher_id', $teacher->id)->first();
 
         return $this->successRes([

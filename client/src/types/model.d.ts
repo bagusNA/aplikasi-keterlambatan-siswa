@@ -62,9 +62,9 @@ export type Roles = Role[]
 export interface SchoolClass {
   // columns
   id: number
-  grade: boolean
+  grade: number
   specialty_id: number
-  number: boolean
+  number: number
   teacher_id: number
   created_at?: Date
   updated_at?: Date
@@ -99,6 +99,14 @@ export interface Specialty {
 export type Specialties = Specialty[]
 
 export interface Student {
+  id: number
+  nisn: string
+  user_id: number
+  name: string
+  gender: "Male" | "Female"
+  class_id: number,
+  created_at?: Date
+  updated_at?: Date
   // relations
   parent: Parent
   user: User
